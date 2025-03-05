@@ -1,0 +1,72 @@
+{
+    "companyName": "Prop Firm Match",
+    "columns": [
+      {
+        "title": "PROP FIRMS",
+        "links": [
+          { "text": "All Prop Firms", "url": "/prop-firms" },
+          { "text": "Compare Challenges", "url": "/compare-challenges" },
+          { "text": "Best Sellers", "url": "/best-sellers" },
+          { "text": "Favorite Firms", "url": "/favorite-firms" },
+          { "text": "Announcements", "url": "/announcements" },
+          { "text": "Prop Firm Rules", "url": "/prop-firm-rules" },
+          { "text": "Reviews", "url": "/reviews" },
+          { "text": "Demo Accounts", "url": "/demo-accounts" },
+          { "text": "Unlisted Firms", "url": "/unlisted-firms" }
+        ]
+      },
+      {
+        "title": "OFFERS",
+        "links": [
+          { "text": "Exclusive Offers", "url": "/exclusive-offers" },
+          { "text": "Extra Account Promo", "url": "/extra-account-promo" },
+          { "text": "All Current Offers", "url": "/all-current-offers" }
+        ]
+      },
+      {
+        "title": "RESOURCES",
+        "links": [
+          { "text": "High Impact News", "url": "/high-impact-news" },
+          { "text": "Blog", "url": "/blog" },
+          { "text": "Prop Firm Features", "url": "/prop-firm-features" }
+        ]
+      },
+      {
+        "title": "PROGRAMS",
+        "links": [
+          { "text": "Loyalty Program", "url": "/loyalty-program" },
+          { "text": "Affiliate Program", "url": "/affiliate-program" }
+        ]
+      },
+      {
+        "title": "COMPANY",
+        "links": [
+          { "text": "About Us", "url": "/about-us" },
+          { "text": "Careers", "url": "/careers" },
+          { "text": "Prop Firm Business", "url": "/prop-firm-business" },
+          { "text": "Press", "url": "/press" },
+          { "text": "Sitemap", "url": "/sitemap" }
+        ]
+      }
+    ],
+    "legalLinks": [
+      { "text": "Privacy Policy", "url": "/privacy-policy" },
+      { "text": "Terms & Conditions", "url": "/terms-conditions" }
+    ],
+    "socialLinks": [
+      { "platform": "twitter", "url": "https://twitter.com/propfirmmatch" },
+      { "platform": "instagram", "url": "https://instagram.com/propfirmmatch" },
+      { "platform": "youtube", "url": "https://youtube.com/propfirmmatch" },
+      { "platform": "tiktok", "url": "https://tiktok.com/@propfirmmatch" }
+    ],
+    "getHelp": {
+      "title": "GET HELP",
+      "links": [
+        { "text": "Contact Us", "url": "/contact-us" },
+        { "text": "How it Works", "url": "/how-it-works" },
+        { "text": "Status", "url": "/status" }
+      ]
+    }
+  }
+  
+  
