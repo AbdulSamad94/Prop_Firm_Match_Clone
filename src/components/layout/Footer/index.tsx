@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -10,14 +9,13 @@ import {
 import footerData from "@/data/footer.json";
 
 export default function Footer() {
-
   return (
-    <footer className="bg-black text-white py-12 px-4 md:px-8">
+    <footer className=" text-white py-12 px-4 md:px-8">
       <div className="container mx-auto max-w-7xl">
         {/* Main footer content */}
         <div className="flex gap-2 md:gap-8">
           {/* Logo column */}
-          <div >
+          <div>
             <Link href="/" className="flex items-center gap-4">
               <div className="relative w-10 h-10">
                 <Image
@@ -63,7 +61,8 @@ export default function Footer() {
         {/* Bottom footer */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} {footerData.companyName}. All rights reserved.
+            &copy; {new Date().getFullYear()} {footerData.companyName}. All
+            rights reserved.
           </div>
 
           <div className="flex gap-4">
@@ -86,10 +85,18 @@ export default function Footer() {
                 className="text-white hover:text-gray-400 transition-colors"
                 aria-label={social.platform}
               >
-                {social.platform === "twitter" && <Twitter className="md:w-7 md:h-7 w-5 h-7" size={28} />}
-                {social.platform === "instagram" && <Instagram className="md:w-7 md:h-7 w-5 h-7" size={28} />}
-                {social.platform === "youtube" && <Youtube className="md:w-7 md:h-7 w-5 h-7" size={28} />}
-                {social.platform === "tiktok" && <TikTok className="md:w-7 md:h-7 w-5 h-7" size={28} />}
+                {social.platform === "twitter" && (
+                  <Twitter className="md:w-7 md:h-7 w-5 h-7" size={28} />
+                )}
+                {social.platform === "instagram" && (
+                  <Instagram className="md:w-7 md:h-7 w-5 h-7" size={28} />
+                )}
+                {social.platform === "youtube" && (
+                  <Youtube className="md:w-7 md:h-7 w-5 h-7" size={28} />
+                )}
+                {social.platform === "tiktok" && (
+                  <TikTok className="md:w-7 md:h-7 w-5 h-7" size={28} />
+                )}
               </Link>
             ))}
           </div>

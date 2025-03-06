@@ -1,3 +1,4 @@
+import PropFirmTable from "@/components/PropFirmTable/PropFirmTable";
 export default function Home() {
   return (
     <div className="">
@@ -9,9 +10,9 @@ export default function Home() {
         Gradient Background Example
       </div>
 
-      <p className="text-[var(--color-secondary-text)]">
-        This is secondary text
-      </p>
+      <div>
+        <PropFirmTable />
+      </div>
       <p className="text-[var(--color-pink)]">This is pink text</p>
       <p className="text-[var(--color-green)]">This is green text</p>
 
