@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: #100E0F;
+  --color-purple: #A05CE8;
+  --color-green: #12AB8D;
+  --color-text: #FFFFFF;
+  --color-secondary-text: #B9C1C2;
+  --color-pink: #E54593;
+  
+  /* Gradient Colors */
+  --gradient-from: #e12afb ;  /* fuchsia-400 */
+  --gradient-to: #A855F7;    /* purple-500 */
+}
+
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
