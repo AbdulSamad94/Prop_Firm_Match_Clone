@@ -2,9 +2,10 @@ import Hero from "@/components/Hero/hero";
 import PropFirmTable from "@/components/PropFirmTable/PropFirmTable";
 import SubscriptionSection from "@/components/SubscriptionSection";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+
 export default function Home() {
   return (
-    <div className="">
+    <main className="">
       <section>
         <Hero />
       </section>
@@ -17,6 +18,6 @@ export default function Home() {
       <section>
         <SubscriptionSection />
       </section>
-    </div>
+    </main>
   );
 }
