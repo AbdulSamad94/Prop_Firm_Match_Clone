@@ -12,12 +12,15 @@ export default function Home() {
         Gradient Background Example
       </div>
 
-      <div>
+      <section className="my-24 md:my-40">
         <PropFirmTable />
-      </div>
-
-      <TestimonialCarousel />
-      <SubscriptionSection />
+      </section>
+      <section>
+        <TestimonialCarousel />
+      </section>
+      <section>
+        <SubscriptionSection />
+      </section>
     </div>
   );
 }
