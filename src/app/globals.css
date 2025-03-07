@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #100E0F;
-  --color-purple: #A05CE8;
-  --color-green: #12AB8D;
-  --color-text: #FFFFFF;
-  --color-secondary-text: #B9C1C2;
-  --color-pink: #E54593;
+  --color-bg: #100e0f;
+  --color-purple: #a05ce8;
+  --color-green: #12ab8d;
+  --color-text: #ffffff;
+  --color-secondary-text: #b9c1c2;
+  --color-pink: #e54593;
 
   /* Gradient Colors */
   --gradient-from: #e12afb;
   /* fuchsia-400 */
-  --gradient-to: #A855F7;
+  --gradient-to: #a855f7;
   /* purple-500 */
 }
 
@@ -22,7 +22,7 @@
 
 :root {
   /* Color Variables */
-  --primary: #8A2BE2;
+  --primary: #8a2be2;
   --primary-light: #9d4eed;
   --primary-dark: #7718c9;
   --secondary: #ff3a8c;
@@ -36,7 +36,7 @@
   --background-dark: #121212;
   --background-card: #1e1e1e;
   --background-card-hover: #2a2a2a;
-  --gradient-purple: linear-gradient(135deg, #8A2BE2 0%, #480995 100%);
+  --gradient-purple: linear-gradient(135deg, #8a2be2 0%, #480995 100%);
   --gradient-pink: linear-gradient(135deg, #ff3a8c 0%, #ff7eb3 100%);
   --gradient-main: linear-gradient(135deg, #1f0d37 0%, #251340 100%);
   --border-color: #373737;
@@ -134,14 +134,20 @@
 }
 
 .inter {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 html,
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: var(--background-dark);
   color: var(--text-white);
   overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+.text-field {
+  @apply block outline-none border-[1px] border-zinc-800 bg-zinc-900 text-zinc-300 ring-inset ring-1 ring-transparent 
+  rounded-full px-4 py-4 text-sm transition-shadow hover:ring-zinc-50/5 focus:ring-[#E54593] focus:ring-1;
 }
