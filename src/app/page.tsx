@@ -17,7 +17,7 @@ export default function Home() {
       </div>
 
       <TestimonialCarousel />
-      <SubscriptionSection/>
+      <SubscriptionSection />
     </div>
   );
 }
