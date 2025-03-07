@@ -16,7 +16,7 @@ const globalWithMongoose = global as typeof global & { mongoose: MongooseCache }
 
 const cached: MongooseCache = globalWithMongoose.mongoose || { conn: null, promise: null };
 
-export async function connectToDatabase() {
+ async function dbConnect() {
     if (cached.conn) return cached.conn;
 
     if (!cached.promise) {
@@ -32,3 +32,5 @@ export async function connectToDatabase() {
     cached.conn = await cached.promise;
     return cached.conn;
 }
+
+export default dbConnect
