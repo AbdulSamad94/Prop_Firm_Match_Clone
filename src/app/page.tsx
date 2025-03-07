@@ -8,7 +8,6 @@ export default function Home() {
       <section>
         <Hero />
       </section>
-
       <section className="my-24 md:my-40">
         <PropFirmTable />
       </section>
