@@ -33,13 +33,13 @@ export const PropFirmTabs: React.FC<PropFirmTabsProps> = ({
       onValueChange={(value) => setActiveTab(value as TabOption)}
     >
       {/* Main Navigation Tabs */}
-      <div className="flex justify-center py-4">
-        <TabsList className="gap-4 p-1 rounded-full">
+      <div className="flex justify-center py-8">
+        <TabsList className="gap-2 md:gap-4 p-1 rounded-full flex-wrap">
           {["Firms", "Challenges", "Offers", "Reviews"].map((tab, index) => (
             <TabsTrigger
               key={index}
               value={tab}
-              className="px-4 py-3 rounded-full data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow text-sm md:text-base font-semibold transition-colors bg-[#28282c] hover:bg-[#1c1a1d] duration-300"
+              className="px-2 py-2 md:px-4 md:py-3 rounded-full data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow text-sm md:text-base font-semibold transition-colors bg-[#28282c] hover:bg-[#1c1a1d] duration-300"
             >
               {tab}
             </TabsTrigger>

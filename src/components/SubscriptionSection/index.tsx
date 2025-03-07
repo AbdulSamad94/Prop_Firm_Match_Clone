@@ -44,7 +44,7 @@ export default function SubscriptionSection() {
   };
 
   return (
-    <section className="w-full py-32 px-4 relative overflow-hidden inter my-20">
+    <section className="w-full py-14 md:py-32 px-4 relative overflow-hidden inter my-20">
       {/* Background gradient */}
       <div
         className="absolute inset-0 w-[95%] mx-auto border border-gray-700 rounded px-8"
@@ -75,7 +75,7 @@ export default function SubscriptionSection() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="absolute right-10 top-[6px] py-3 px-3 rounded-full bg-gradient-to-r from-pink-600 to-purple-500 hover:bg-pink-600 transition-colors text-white font-medium disabled:opacity-70 text-sm"
+            className="absolute right-2 md:right-10 top-[6px] py-3 px-3 rounded-full bg-gradient-to-r from-pink-600 to-purple-500 hover:bg-pink-600 transition-colors text-white font-medium disabled:opacity-70 text-sm"
           >
             {isSubmitting ? "Subscribing..." : "Subscribe"}
           </button>
