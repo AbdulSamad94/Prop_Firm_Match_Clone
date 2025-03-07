@@ -1,5 +1,5 @@
 import PropFirmTable from "@/components/PropFirmTable/PropFirmTable";
-import SubscribeSection from "@/components/SubscribeSection";
+import SubscriptionSection from "@/components/SubscriptionSection";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
       </div>
 
       <TestimonialCarousel />
-      <SubscribeSection />
+      <SubscriptionSection/>
     </div>
   );
 }
