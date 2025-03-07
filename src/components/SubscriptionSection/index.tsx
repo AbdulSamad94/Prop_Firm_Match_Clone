@@ -47,7 +47,7 @@ export default function SubscriptionSection() {
     <section className="w-full py-32 px-4 relative overflow-hidden inter my-20">
       {/* Background gradient */}
       <div
-        className="absolute inset-0 w-[95%] mx-auto border border-gray-700 rounded"
+        className="absolute inset-0 w-[95%] mx-auto border border-gray-700 rounded px-8"
         style={{
           backgroundSize: "200% 200%",
           animation: "gradientAnimation 15s ease infinite",
@@ -70,7 +70,7 @@ export default function SubscriptionSection() {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-96 h-14 py-3 px-4 rounded-full bg-[#28282c] text-white ring-1 ring-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-pink-500 duration-300 text-sm"
+            className="md:w-96 w-full h-14 py-3 px-4 rounded-full bg-[#28282c] text-white ring-1 ring-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-pink-500 duration-300 text-sm"
           />
           <button
             type="submit"
