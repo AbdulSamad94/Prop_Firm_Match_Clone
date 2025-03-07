@@ -47,7 +47,7 @@ export default function SubscriptionSection() {
     <section className="w-full py-32 px-4 relative overflow-hidden inter my-20">
       {/* Background gradient */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-purple-700 via-black to-purple-700 w-[95%] mx-auto border border-gray-700 rounded"
+        className="absolute inset-0 w-[95%] mx-auto border border-gray-700 rounded"
         style={{
           backgroundSize: "200% 200%",
           animation: "gradientAnimation 15s ease infinite",

@@ -9,7 +9,6 @@ type TabOption = "Firms" | "Challenges" | "Offers" | "Reviews";
 export default function UpperNavigation() {
   const [activeTab, setActiveTab] = useState<TabOption>("Firms");
   const [activeFilter, setActiveFilter] = useState<string | null>("Popular");
-  const [favoriteCount, setFavoriteCount] = useState(0);
 
   const handleTabChange = (tab: TabOption) => {
     setActiveTab(tab);
@@ -83,7 +82,7 @@ export default function UpperNavigation() {
               color={activeFilter === "Favorite" ? "#E94A96" : "white"}
               fill={activeFilter === "Favorite" ? "#E94A96" : "none"}
             />
-            Favorite {favoriteCount}/5
+            Favorite 0/5
           </button>
 
           {/* New Filter */}
