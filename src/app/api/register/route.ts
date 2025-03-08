@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnection';
 import User from '@/models/User';
-import { hash } from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { signIn } from '@/lib/auth';
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -18,51 +17,33 @@ export async function POST(request: Request) {
       );
     }
 
-    const hashedPassword = await hash(password, 10);
+    // Create new user - password will be hashed by the pre-save middleware
     const user = new User({
       fullname,
       email,
-      password: hashedPassword,
+      password,
       emailVerified: new Date()
     });
 
     await user.save();
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user._id.toString() },
-      process.env.AUTH_SECRET!,
-      { expiresIn: '7d' }
-    );
+    // Instead of creating our own JWT, let NextAuth handle authentication
+    // This ensures consistent behavior across the app
+    await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
 
-    // Determine cookie name based on environment
-    const isProduction = process.env.NODE_ENV === 'production';
-    const cookieName = isProduction
-      ? '__Secure-next-auth.session-token'
-      : 'next-auth.session-token';
-
-    // Create response
-    const response = NextResponse.json(
+    return NextResponse.json(
       { message: 'Registration successful', userId: user._id },
       { status: 201 }
     );
 
-    // Set session cookie
-    response.cookies.set({
-      name: cookieName,
-      value: token,
-      httpOnly: true,
-      secure: isProduction,
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-      path: '/',
-    });
-
-    return response;
-
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
     return NextResponse.json(
-      { error: error.message },
+      { error: errorMessage },
       { status: 500 }
     );
   }

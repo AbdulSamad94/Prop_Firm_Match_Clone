@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import NavItems from "./navItems";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +17,15 @@ export default function Navbar() {
       <div className="flex items-center justify-between w-full">
         {/* Logo and Products dropdown */}
         <div className="flex items-center">
-          <Image
-            src={"/pfm-logo.svg"}
-            alt="Prop Firm Match Logo"
-            width={200}
-            height={200}
-            className="md:w-auto w-32"
-          />
+          <Link href={"/"}>
+            <Image
+              src={"/pfm-logo.svg"}
+              alt="Prop Firm Match Logo"
+              width={200}
+              height={200}
+              className="md:w-auto w-32"
+            />
+          </Link>
 
           <div className="hidden md:flex md:items-center">
             <span className="text-[#B9C1C2] mx-4 opacity-70">|</span>
@@ -66,12 +69,17 @@ export default function Navbar() {
 
         {/* Login buttons - hide on mobile */}
         <div className="hidden md:flex md:gap-5 md:items-center">
-          <Button className="hover:bg-zinc-800 transition-all duration-200 text-white bg-transparent rounded-full cursor-pointer">
-            Login
-          </Button>
-          <Button className="bg-gradient-to-r from-pink-500 to-purple-500 cursor-pointer rounded-full duration-200 transition-all">
-            Sign Up
-          </Button>
+          <Link href={"/login"}>
+            <Button className="hover:bg-zinc-800 transition-all duration-200 text-white bg-transparent rounded-full cursor-pointer">
+              Login
+            </Button>
+          </Link>
+          <Link href={"register"}>
+            <Button className="bg-gradient-to-r from-pink-500 to-purple-500 cursor-pointer rounded-full duration-200 transition-all">
+              {" "}
+              Sign Up
+            </Button>
+          </Link>
           <span className="text-[#3a3b3b] opacity-70">|</span>
           <div className="flex gap-2 items-center">
             <Image
@@ -113,10 +121,14 @@ export default function Navbar() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Button className="w-full justify-center">Login</Button>
-            <Button className="w-full justify-center bg-gradient-to-r from-pink-500 to-purple-500">
-              Sign Up
-            </Button>
+            <Link href={"/login"}>
+              <Button className="w-full justify-center">Login</Button>
+            </Link>
+            <Link href={"/register"}>
+              <Button className="w-full justify-center bg-gradient-to-r from-pink-500 to-purple-500">
+                Sign Up
+              </Button>
+            </Link>
           </div>
 
           <div className="flex gap-2 items-center p-2">
