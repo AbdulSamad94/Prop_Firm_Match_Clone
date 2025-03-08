@@ -1,12 +1,14 @@
 import NextAuth from 'next-auth';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import mongoose from 'mongoose';
 import dbConnect from '@/lib/dbConnection';
 import User from '@/models/User';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import clientPromise from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
 
+// Initialize the MongoDB adapter properly
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: MongoDBAdapter(mongoose.connection.getClient()),
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -16,20 +18,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials) {
         await dbConnect();
-        
+
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }
 
-        const user = await User.findOne({ email: credentials.email }).select('+password');
-        
-        if (!user || !(await user.comparePassword(credentials.password as string))) {
+        const user = await User.findOne({ email: credentials.email });
+
+        if (!user) {
           throw new Error('Invalid credentials');
         }
-        const id = user._id as string
+
+        // Fix TypeScript error by explicitly passing credentials.password as string
+        const isValidPassword = await user.comparePassword(credentials.password as string);
+
+        if (!isValidPassword) {
+          throw new Error('Invalid credentials');
+        }
+
+        // Fix TypeScript error by safely accessing _id with type assertion
+        const userId = (user._id as unknown) as ObjectId;
 
         return {
-          id: id.toString(),
+          id: userId.toString(),
           email: user.email,
           name: user.fullname
         };
@@ -47,7 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token?.id) {
+      if (session.user && token?.id) {
         session.user.id = token.id as string;
       }
       return session;
@@ -56,5 +67,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: '/login'
   },
-  secret: process.env.NEXTAUTH_SECRET
+  // Using AUTH_SECRET instead of NEXTAUTH_SECRET
+  secret: process.env.AUTH_SECRET
 });
