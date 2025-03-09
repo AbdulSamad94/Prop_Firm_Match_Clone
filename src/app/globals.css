@@ -146,8 +146,8 @@ body {
   color: var(--text-white);
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background-image: radial-gradient(circle at top right, rgba(138, 43, 226, 0.15), transparent 70%),
-    radial-gradient(circle at bottom left, rgba(255, 58, 140, 0.1), transparent 70%);
+  /* background-image: radial-gradient(circle at top right, rgba(138, 43, 226, 0.15), transparent 70%),
+    radial-gradient(circle at bottom left, rgba(255, 58, 140, 0.1), transparent 70%); */
   background-attachment: fixed;
   position: relative;
   /* Add this */
