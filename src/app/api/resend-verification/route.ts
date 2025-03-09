@@ -1,4 +1,3 @@
-// src/app/api/resend-verification/route.ts
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnection';
 import User from '@/models/User';

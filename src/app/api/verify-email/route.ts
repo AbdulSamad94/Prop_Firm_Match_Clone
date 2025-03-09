@@ -1,4 +1,3 @@
-// src/app/api/verify-email/route.ts
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnection';
 import User from '@/models/User';
@@ -34,7 +33,7 @@ export async function POST(request: Request) {
         await signIn('credentials', {
             redirect: false,
             email,
-            password: user.password, // This is the hashed password, but we'll let NextAuth handle authentication
+            password: '', // Empty password for internal verification login
         });
 
         return NextResponse.json(

@@ -50,15 +50,12 @@ function VerifyEmailForm() {
     setError(null);
 
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("/api/resend-verification", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          resend: true,
-        }),
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
