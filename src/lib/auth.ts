@@ -1,3 +1,4 @@
+// src/lib/auth.ts
 import NextAuth from 'next-auth';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import dbConnect from '@/lib/dbConnection';
@@ -27,6 +28,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user) {
           throw new Error('Invalid credentials');
+        }
+
+        // Check if email is verified
+        if (!user.emailVerified) {
+          throw new Error('Please verify your email before signing in');
         }
 
         // Fix TypeScript error by explicitly passing credentials.password as string
@@ -65,7 +71,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }
   },
   pages: {
-    signIn: '/login'
+    signIn: '/login',
+    error: '/login'
   },
   // Using AUTH_SECRET instead of NEXTAUTH_SECRET
   secret: process.env.AUTH_SECRET

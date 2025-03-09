@@ -1,3 +1,4 @@
+// src/models/User.ts
 import mongoose, { Document, Model } from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -9,6 +10,8 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
   emailVerified?: Date;
+  verificationCode?: string;
+  verificationCodeExpires?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -37,6 +40,14 @@ const userSchema = new mongoose.Schema<IUser, IUserModel>(
       minlength: [6, 'Password must be at least 6 characters']
     },
     emailVerified: {
+      type: Date,
+      default: null
+    },
+    verificationCode: {
+      type: String,
+      default: null
+    },
+    verificationCodeExpires: {
       type: Date,
       default: null
     }

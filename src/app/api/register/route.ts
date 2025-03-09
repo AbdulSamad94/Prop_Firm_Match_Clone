@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnection';
 import User from '@/models/User';
-import { signIn } from '@/lib/auth';
+import { generateOTP, sendVerificationEmail } from '@/lib/email';
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -11,32 +11,71 @@ export async function POST(request: Request) {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return NextResponse.json(
-        { error: 'User already exists' },
-        { status: 400 }
-      );
+      // If user exists but is not verified, allow resending the verification code
+      if (!existingUser.emailVerified) {
+        // Generate new OTP
+        const verificationCode = generateOTP();
+        const verificationCodeExpires = new Date();
+        verificationCodeExpires.setMinutes(verificationCodeExpires.getMinutes() + 15); // 15 minutes expiry
+
+        // Update user with new verification code
+        existingUser.verificationCode = verificationCode;
+        existingUser.verificationCodeExpires = verificationCodeExpires;
+        await existingUser.save();
+
+        // Send verification email
+        const emailResult = await sendVerificationEmail(email, verificationCode);
+
+        if (!emailResult.success) {
+          return NextResponse.json(
+            { error: 'Failed to send verification email. Please try again.' },
+            { status: 500 }
+          );
+        }
+
+        return NextResponse.json(
+          { message: 'Verification code resent successfully' },
+          { status: 200 }
+        );
+      } else {
+        return NextResponse.json(
+          { error: 'User already exists' },
+          { status: 400 }
+        );
+      }
     }
 
-    // Create new user - password will be hashed by the pre-save middleware
+    // Generate verification code
+    const verificationCode = generateOTP();
+    const verificationCodeExpires = new Date();
+    verificationCodeExpires.setMinutes(verificationCodeExpires.getMinutes() + 15); // 15 minutes expiry
+
+    // Create new user with verification code - password will be hashed by the pre-save middleware
     const user = new User({
       fullname,
       email,
       password,
-      emailVerified: new Date()
+      verificationCode,
+      verificationCodeExpires,
+      // Don't set emailVerified yet
     });
 
     await user.save();
 
-    // Instead of creating our own JWT, let NextAuth handle authentication
-    // This ensures consistent behavior across the app
-    await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
-    });
+    // Send verification email
+    const emailResult = await sendVerificationEmail(email, verificationCode);
+
+    if (!emailResult.success) {
+      // If email fails to send, remove the user from database
+      await User.deleteOne({ email });
+      return NextResponse.json(
+        { error: 'Failed to send verification email. Please try again.' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
-      { message: 'Registration successful', userId: user._id },
+      { message: 'Registration initiated. Please check your email for verification.' },
       { status: 201 }
     );
 
