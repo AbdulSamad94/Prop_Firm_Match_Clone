@@ -14,10 +14,10 @@ export default function RegisterPage() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const confirmPassword = formData.get("confirmPassword") as string;
 
-    // Add client-side validation
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       setIsLoading(false);
@@ -38,8 +38,8 @@ export default function RegisterPage() {
         },
         body: JSON.stringify({
           fullname: formData.get("fullname"),
-          email: formData.get("email"),
-          password: formData.get("password"),
+          email,
+          password,
         }),
       });
 
@@ -48,8 +48,7 @@ export default function RegisterPage() {
       if (!response.ok) {
         setError(data.error || "Registration failed");
       } else {
-        router.push("/dashboard");
-        router.refresh();
+        router.push(`/verify-email?email=${encodeURIComponent(email)}`);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");
