@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect, Suspense } from "react";
 // import { signIn } from "next-auth/react";
-import {  useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import LoginCarousel from "@/components/LoginCarousels";
 
 // Component that uses useSearchParams
 function LoginForm() {
@@ -98,24 +99,30 @@ function LoginForm() {
   // const isVerificationError = error?.includes("verify your email");
 
   return (
-    <div className="flex">
-      <div className="">
-
+    <div className="flex gap-8 w-full">
+      <div className="hidden sm:block w-[46%] ">
+        <LoginCarousel />
       </div>
 
-      <div className="flex flex-col  gap-6 ">
-        <div className="flex flex-col">
-          <h1 className="text-center text-4xl font-bold">
+      <div className="flex flex-col mx-auto gap-6 justify-center">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-center md:text-4xl font-bold text-2xl">
             Sign in to Prop Firm Match
           </h1>
-          <p className="text-center text-zinc-400">
+          <p className="text-center text-zinc-400 md:text-lg text-sm">
             Welcome back! Please sign in to continue
           </p>
         </div>
 
         <div className="flex justify-center">
-          <Button className="bg-transparent border border-zinc-600 rounded-full w-[70%] hover:bg-neutral-900 cursor-pointer py-3 ">
-            <Image src="/google-icon.png" alt="Google Icon" height={1000} width={1000}/>
+          <Button className="bg-transparent border border-zinc-600 rounded-full  hover:bg-neutral-900 cursor-pointer py-3 ">
+            <Image
+              src="/google-icon.png"
+              alt="Google Icon"
+              height={1000}
+              width={1000}
+              className="w-4"
+            />
             Continue with Google
           </Button>
         </div>
@@ -176,7 +183,6 @@ function LoginForm() {
           </Link>
         </div>
       </div>
-
     </div>
   );
 }
