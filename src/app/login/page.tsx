@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, Suspense } from "react";
-// import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,60 +9,61 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import LoginCarousel from "@/components/LoginCarousels";
 
+
 // Component that uses useSearchParams
 function LoginForm() {
-  // const router = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
 
   // Check for error in URL params (redirected from NextAuth)
   useEffect(() => {
     const errorParam = searchParams.get("error");
     if (errorParam === "CredentialsSignin") {
-      // setError("Invalid email or password");
+      setError("Invalid email or password");
     } else if (errorParam) {
-      // setError(errorParam);
+      setError(errorParam);
     }
   }, [searchParams]);
 
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   // setIsLoading(true);
-  //   setError(null);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-  //   const formData = new FormData(e.currentTarget);
-  //   const emailValue = formData.get("email") as string;
+    const formData = new FormData(e.currentTarget);
+    const emailValue = formData.get("email") as string;
 
-  //   // Store email for potential verification redirect
-  //   setEmail(emailValue);
+    // Store email for potential verification redirect
+    setEmail(emailValue);
 
-  //   try {
-  //     const result = await signIn("credentials", {
-  //       email: emailValue,
-  //       password: formData.get("password") as string,
-  //       redirect: false,
-  //     });
+    try {
+      const result = await signIn("credentials", {
+        email: emailValue,
+        password: formData.get("password") as string,
+        redirect: false,
+      });
 
-  //     if (result?.error) {
-  //       // Check if the error is related to email verification
-  //       if (result.error.includes("verify your email")) {
-  //         setError("Please verify your email before signing in");
-  //       } else {
-  //         setError(result.error);
-  //       }
-  //     } else {
-  //       router.push("/dashboard");
-  //       router.refresh();
-  //     }
-  //   } catch (err) {
-  //     setError("An unexpected error occurred. Please try again.");
-  //     console.error(err);
-  //   } finally {
-  //     // setIsLoading(false);
-  //   }
-  // };
+      if (result?.error) {
+        // Check if the error is related to email verification
+        if (result.error.includes("verify your email")) {
+          setError("Please verify your email before signing in");
+        } else {
+          setError(result.error);
+        }
+      } else {
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // const handleResendVerification = async () => {
   //   if (!email) return;
@@ -95,7 +96,7 @@ function LoginForm() {
   //   }
   // };
 
-  // Check if error is related to verification
+  // // Check if error is related to verification
   // const isVerificationError = error?.includes("verify your email");
 
   return (
@@ -104,7 +105,7 @@ function LoginForm() {
         <LoginCarousel />
       </div>
 
-      <div className="flex flex-col mx-auto gap-6 justify-center">
+      <form onSubmit={handleSubmit} className="flex flex-col mx-auto gap-6 justify-center">
         <div className="flex flex-col gap-2">
           <h1 className="text-center md:text-4xl font-bold text-2xl">
             Sign in to Prop Firm Match
@@ -132,6 +133,8 @@ function LoginForm() {
           <span>or</span>
           <div className="w-[30%] h-[1px] bg-neutral-600"></div>
         </div>
+
+
 
         <div className="flex flex-col gap-2">
           <div className="">
@@ -169,8 +172,23 @@ function LoginForm() {
           </Link>
         </div>
 
-        <Button className="rounded-full bg-gradient-to-r from-pink-500 to-purple-500 cursor-pointer hover:bg-gradient-to-r hover:from-[#E854BC] hover:to-[#B763F5]">
-          Continue <ChevronRight />
+        {error && (
+          <div className="bg-red-50 border-l-4 border-red-500 p-4">
+            <div className="flex">
+              <div>
+                <p className="text-sm text-red-700">{error}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+
+        <Button type="submit" className="rounded-full bg-gradient-to-r from-pink-500 to-purple-500 cursor-pointer hover:bg-gradient-to-r hover:from-[#E854BC] hover:to-[#B763F5]">
+        {isLoading ? ("Processing...") : (
+          <div className="flex items-center">
+            Continue <ChevronRight />
+          </div>
+        )}  
         </Button>
 
         <div className="flex gap-1 justify-center">
@@ -182,7 +200,7 @@ function LoginForm() {
             Sign Up
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
