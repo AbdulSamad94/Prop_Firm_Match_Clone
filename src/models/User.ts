@@ -1,5 +1,5 @@
 // src/models/User.ts
-import mongoose, { Document, Model } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // Interface for User document
@@ -15,12 +15,9 @@ export interface IUser extends Document {
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-// Interface for User model
-interface IUserModel extends Model<IUser> {
-  comparePassword(email: string, password: string): Promise<IUser | null>;
-}
 
-const userSchema = new mongoose.Schema<IUser, IUserModel>(
+
+const userSchema = new mongoose.Schema<IUser>(
   {
     fullname: {
       type: String,
@@ -81,5 +78,5 @@ if (mongoose.models.User) {
 }
 
 // Create and export the model
-const User = mongoose.model<IUser, IUserModel>('User', userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 export default User;
