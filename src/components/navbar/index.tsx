@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex flex-col justify-center gap-3 px-6 py-4">
+    <div className="flex flex-col justify-center gap-3 px-6 py-4 sticky top-0 w-full">
       {/* Top section with logo, search, login buttons */}
       <div className="flex items-center justify-between w-full">
         {/* Logo and Products dropdown */}
