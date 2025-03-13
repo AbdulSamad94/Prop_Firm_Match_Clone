@@ -21,7 +21,7 @@ export const FirmDetail = ({ firm }: FirmDetailProps) => {
 
         <div className="flex space-x-3">
           <button
-            onClick={() => Router.push(`/admin/firms/${firm.id}/edit`)}
+            onClick={() => Router.push(`/dashboard/firms/${firm.id}/edit`)}
             className="px-4 py-2 rounded-md bg-sidebar-accent text-text-white transition-colors hover:bg-sidebar-accent/80"
           >
             Edit Firm

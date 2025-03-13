@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 
 export const BackButton = ({ label = "Back" }: { label?: string }) => {
+  const Router = useRouter();
   return (
     <button
       onClick={() => Router.back()}

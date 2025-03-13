@@ -35,7 +35,7 @@ export const AdminSidebar = ({
     <>
       {/* Mobile sidebar toggle */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-sidebar-accent"
+        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md"
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
@@ -65,7 +65,7 @@ export const AdminSidebar = ({
         {/* Navigation links */}
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
           <Link
-            href="/admin"
+            href="/dashboard"
             className="flex items-center px-4 py-3 rounded-md hover:bg-background-card-hover transition-colors"
           >
             <Home size={20} className="mr-3" />
@@ -93,13 +93,13 @@ export const AdminSidebar = ({
             {expandedMenus.firms && (
               <div className="pl-10 space-y-1 mt-1">
                 <Link
-                  href="/admin/firms"
+                  href="/dashboard/firms"
                   className="flex items-center px-4 py-2 rounded-md hover:bg-background-card-hover transition-colors text-text-light"
                 >
                   All Firms
                 </Link>
                 <Link
-                  href="/admin/firms/add"
+                  href="/dashboard/firms/add"
                   className="flex items-center px-4 py-2 rounded-md hover:bg-background-card-hover transition-colors text-text-light"
                 >
                   <Plus size={16} className="mr-2" />
@@ -110,7 +110,7 @@ export const AdminSidebar = ({
           </div>
 
           <Link
-            href="/admin/users"
+            href="/dashboard/users"
             className="flex items-center px-4 py-3 rounded-md hover:bg-background-card-hover transition-colors"
           >
             <Users size={20} className="mr-3" />
@@ -118,7 +118,7 @@ export const AdminSidebar = ({
           </Link>
 
           <Link
-            href="/admin/settings"
+            href="/dashboard/settings"
             className="flex items-center px-4 py-3 rounded-md hover:bg-background-card-hover transition-colors"
           >
             <Settings size={20} className="mr-3" />

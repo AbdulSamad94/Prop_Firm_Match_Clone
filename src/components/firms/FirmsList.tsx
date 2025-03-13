@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { FirmType } from "@/types";
 
@@ -12,14 +12,13 @@ interface FirmsListProps {
 }
 
 export const FirmsList = ({ firms }: FirmsListProps) => {
-  const router = Router;
-
+  const Router = useRouter();
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">All Firms</h1>
         <Link
-          href="/admin/firms/add"
+          href="/dashboard/firms/add"
           className="px-4 py-2 rounded-md transition-colors"
           style={{
             background: "var(--gradient-purple)",
@@ -61,7 +60,7 @@ export const FirmsList = ({ firms }: FirmsListProps) => {
               <tr
                 key={firm.id}
                 className="hover:bg-background-card-hover cursor-pointer transition-colors"
-                onClick={() => router.push(`/admin/firms/${firm.id}`)}
+                onClick={() => Router.push(`/dashboard/firms/${firm.id}`)}
                 style={{ backgroundColor: "var(--background-card)" }}
               >
                 <td className="px-6 py-4 border-b border-border-color font-medium">
@@ -81,7 +80,7 @@ export const FirmsList = ({ firms }: FirmsListProps) => {
                     className="text-text-gray hover:text-text-white transition-colors"
                     onClick={(e) => {
                       e.stopPropagation();
-                      router.push(`/admin/firms/${firm.id}/edit`);
+                      Router.push(`/dashboard/firms/${firm.id}/edit`);
                     }}
                   >
                     Edit

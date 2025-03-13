@@ -48,7 +48,7 @@ export const FirmForm = ({
     e.preventDefault();
     // Here you would submit the data to your API
     console.log(formData);
-    router.push("/admin/firms");
+    router.push("/dashboard/firms");
   };
 
   return (

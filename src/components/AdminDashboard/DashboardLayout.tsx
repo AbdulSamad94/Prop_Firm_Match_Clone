@@ -9,7 +9,7 @@ export const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="flex h-screen bg-background-dark text-text-white">
+    <div className="flex h-screen bg-background-dark text-text-white py-20 md:py-0">
       <AdminSidebar
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
